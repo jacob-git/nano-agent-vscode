@@ -89,6 +89,8 @@ npm run package
 
 Run the extension from VS Code with the `Run Extension` launch config.
 
+Marketplace publishing is automated from version tags after `VSCE_PAT` is configured in GitHub Actions. See [docs/release.md](docs/release.md).
+
 ## Privacy
 
 Nano Agent analysis runs locally in the VS Code extension host. This extension does not call a Nano Agent server. When you paste compacted output into Copilot or use Copilot Chat, GitHub Copilot's own terms and organization policies apply.
