@@ -2,7 +2,7 @@
   "name": "nano-agent-vscode",
   "displayName": "Nano Agent",
   "description": "VS Code Copilot tools for inspecting, compacting, and enforcing AI prompt context budgets.",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "type": "module",
   "publisher": "pallattu",
   "license": "MIT",
@@ -116,7 +116,7 @@
     "watch": "tsc -watch -p ./",
     "lint": "tsc --noEmit -p ./",
     "test": "npm run build && node --test dist/test/*.test.js",
-    "package": "vsce package --no-dependencies"
+    "package": "vsce package"
   },
   "dependencies": {
     "@pallattu/nano-agent": "^0.2.2"
