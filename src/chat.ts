@@ -20,22 +20,32 @@ export function registerChat(context: vscode.ExtensionContext): void {
     void chatContext;
     if (token.isCancellationRequested) return;
 
-    const text = getActiveText();
-    const result = analyzeText(text, { maxInputTokens: getMaxInputTokens() });
+    try {
+      const text = getActiveText();
+      const result = analyzeText(text, { maxInputTokens: getMaxInputTokens() });
 
-    if (request.command === "compact" || request.prompt.toLowerCase().includes("compact")) {
-      response.markdown(`\`\`\`json\n${compactPacketJson(result)}\n\`\`\``);
-      return;
+      if (request.command === "compact" || request.prompt.toLowerCase().includes("compact")) {
+        response.markdown(`\`\`\`json\n${compactPacketJson(result)}\n\`\`\``);
+        return;
+      }
+
+      if (request.command === "fixture" || request.prompt.toLowerCase().includes("fixture")) {
+        response.markdown(`\`\`\`json\n${createFixture(text, getMaxInputTokens())}\n\`\`\``);
+        return;
+      }
+
+      response.markdown(formatReport(result));
+    } catch (error) {
+      const message = error instanceof Error ? error.message : String(error);
+      response.markdown([
+        "Nano Agent could not inspect a prompt yet.",
+        "",
+        message,
+        "",
+        "Open a prompt/context file in the editor, or select the prompt text, then run `@nano-agent inspect this prompt` again.",
+      ].join("\n"));
     }
-
-    if (request.command === "fixture" || request.prompt.toLowerCase().includes("fixture")) {
-      response.markdown(`\`\`\`json\n${createFixture(text, getMaxInputTokens())}\n\`\`\``);
-      return;
-    }
-
-    response.markdown(formatReport(result));
   });
 
-  participant.iconPath = vscode.Uri.joinPath(context.extensionUri, "media", "icon.png");
   context.subscriptions.push(participant);
 }

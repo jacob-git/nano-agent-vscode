@@ -2,7 +2,7 @@
   "name": "nano-agent-vscode",
   "displayName": "Nano Agent",
   "description": "VS Code Copilot tools for inspecting, compacting, and enforcing AI prompt context budgets.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "type": "module",
   "publisher": "pallattu",
   "license": "MIT",
