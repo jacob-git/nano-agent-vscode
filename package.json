@@ -1,0 +1,120 @@
+{
+  "name": "nano-agent-vscode",
+  "displayName": "Nano Agent",
+  "description": "VS Code Copilot tools for inspecting, compacting, and enforcing AI prompt context budgets.",
+  "version": "0.0.1",
+  "type": "module",
+  "publisher": "pallattu",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jacob-git/nano-agent-vscode.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jacob-git/nano-agent-vscode/issues"
+  },
+  "homepage": "https://github.com/jacob-git/nano-agent-vscode#readme",
+  "engines": {
+    "vscode": "^1.103.0"
+  },
+  "categories": [
+    "AI",
+    "Linters",
+    "Other"
+  ],
+  "keywords": [
+    "github-copilot",
+    "copilot",
+    "prompt",
+    "tokens",
+    "llm",
+    "ai",
+    "context-window"
+  ],
+  "activationEvents": [
+    "onCommand:nanoAgent.analyzeSelection",
+    "onCommand:nanoAgent.compactSelection",
+    "onCommand:nanoAgent.createFixture",
+    "onCommand:nanoAgent.addCiCheck",
+    "onChatParticipant:nano-agent",
+    "onLanguageModelTool:nanoAgentAnalyzeSelection"
+  ],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "nanoAgent.analyzeSelection",
+        "title": "Nano Agent: Analyze Selection"
+      },
+      {
+        "command": "nanoAgent.compactSelection",
+        "title": "Nano Agent: Compact Selection"
+      },
+      {
+        "command": "nanoAgent.createFixture",
+        "title": "Nano Agent: Create Benchmark Fixture"
+      },
+      {
+        "command": "nanoAgent.addCiCheck",
+        "title": "Nano Agent: Add GitHub Action Budget Check"
+      }
+    ],
+    "configuration": {
+      "title": "Nano Agent",
+      "properties": {
+        "nanoAgent.maxInputTokens": {
+          "type": "number",
+          "default": 1200,
+          "minimum": 1,
+          "description": "Default input-token budget for Nano Agent analysis."
+        },
+        "nanoAgent.maxRecentMessages": {
+          "type": "number",
+          "default": 6,
+          "minimum": 0,
+          "description": "Default recent-message count for generated fixtures."
+        }
+      }
+    },
+    "chatParticipants": [
+      {
+        "id": "nano-agent",
+        "name": "nano-agent",
+        "fullName": "Nano Agent",
+        "description": "Inspect and compact AI prompt context budgets."
+      }
+    ],
+    "languageModelTools": [
+      {
+        "name": "nanoAgentAnalyzeSelection",
+        "displayName": "Analyze Nano Agent Context Budget",
+        "modelDescription": "Analyze the active editor selection or document and return Nano Agent token budget, savings, kept context, and dropped context.",
+        "inputSchema": {
+          "type": "object",
+          "properties": {
+            "maxInputTokens": {
+              "type": "number",
+              "description": "Maximum input tokens to allow."
+            }
+          }
+        }
+      }
+    ]
+  },
+  "scripts": {
+    "build": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "lint": "tsc --noEmit -p ./",
+    "test": "npm run build && node --test dist/test/*.test.js",
+    "package": "vsce package --no-dependencies"
+  },
+  "dependencies": {
+    "@pallattu/nano-agent": "^0.2.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.19.39",
+    "@types/vscode": "^1.103.0",
+    "@vscode/vsce": "^3.9.1",
+    "typescript": "^5.9.3"
+  }
+}
