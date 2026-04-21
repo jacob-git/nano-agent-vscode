@@ -1,5 +1,8 @@
 # Nano Agent for VS Code
 
+[![Visual Studio Marketplace Version](https://img.shields.io/visual-studio-marketplace/v/Pallattu.nano-agent-vscode?label=VS%20Marketplace)](https://marketplace.visualstudio.com/items?itemName=Pallattu.nano-agent-vscode)
+[![Visual Studio Marketplace Installs](https://img.shields.io/visual-studio-marketplace/i/Pallattu.nano-agent-vscode)](https://marketplace.visualstudio.com/items?itemName=Pallattu.nano-agent-vscode)
+
 Inspect and compact AI prompt context before it reaches GitHub Copilot.
 
 Nano Agent is for teams that want Copilot help without throwing entire noisy files, logs, and prompt drafts into the model by default.
@@ -25,6 +28,16 @@ It is intentionally small:
 - Add a GitHub Actions prompt-budget workflow.
 - Show local diagnostics and extension logs when Copilot Chat integration needs debugging.
 - Expose `@nano-agent` as a Copilot Chat participant when the VS Code Chat API is available.
+
+## Install
+
+Install from the [Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=Pallattu.nano-agent-vscode), or search for `Nano Agent` in VS Code Extensions.
+
+You can also install directly from VS Code:
+
+```text
+ext install Pallattu.nano-agent-vscode
+```
 
 ## Commands
 
