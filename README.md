@@ -12,6 +12,7 @@ Nano Agent does not add another AI chatbot. It gives Copilot and VS Code a focus
 - Open a compact context packet as JSON.
 - Create Nano Agent benchmark fixtures from selected text.
 - Add a GitHub Actions prompt-budget workflow.
+- Show local diagnostics and extension logs when Copilot Chat integration needs debugging.
 - Expose `@nano-agent` as a Copilot Chat participant when the VS Code Chat API is available.
 - Expose `nanoAgentAnalyzeSelection` as a Copilot language model tool when the VS Code Language Model Tool API is available.
 
@@ -22,6 +23,8 @@ Nano Agent: Analyze Selection
 Nano Agent: Compact Selection
 Nano Agent: Create Benchmark Fixture
 Nano Agent: Add GitHub Action Budget Check
+Nano Agent: Show Diagnostics
+Nano Agent: Show Output
 ```
 
 ## Copilot Chat
@@ -41,6 +44,8 @@ nanoAgentAnalyzeSelection
 ```
 
 This lets Copilot ask Nano Agent for a structured budget report while working on prompts, RAG fixtures, and agent context files.
+
+If Copilot Chat appears to hang, run `Nano Agent: Show Diagnostics` and check the `Nano Agent` output channel.
 
 ## Settings
 

@@ -1,4 +1,5 @@
 import * as vscode from "vscode";
+import { logError, logInfo } from "./log.js";
 import { analyzeText, compactPacketJson, createFixture, formatReport } from "./nano.js";
 import { getActiveText, getMaxInputTokens } from "./workspace.js";
 
@@ -8,6 +9,7 @@ type ChatRequest = vscode.ChatRequest & {
 
 export function registerChat(context: vscode.ExtensionContext): void {
   if (!vscode.chat?.createChatParticipant) {
+    logInfo("Chat participant API is unavailable in this VS Code build.");
     return;
   }
 
@@ -21,6 +23,7 @@ export function registerChat(context: vscode.ExtensionContext): void {
     if (token.isCancellationRequested) return;
 
     try {
+      logInfo(`Chat request received: ${request.command ?? "default"}.`);
       const text = getActiveText();
       const result = analyzeText(text, { maxInputTokens: getMaxInputTokens() });
 
@@ -36,6 +39,7 @@ export function registerChat(context: vscode.ExtensionContext): void {
 
       response.markdown(formatReport(result));
     } catch (error) {
+      logError("Chat request", error);
       const message = error instanceof Error ? error.message : String(error);
       response.markdown([
         "Nano Agent could not inspect a prompt yet.",
