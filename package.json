@@ -1,11 +1,12 @@
 {
   "name": "nano-agent-vscode",
   "displayName": "Nano Agent",
-  "description": "VS Code Copilot tools for inspecting, compacting, and enforcing AI prompt context budgets.",
-  "version": "0.0.5",
+  "description": "Inspect and compact AI prompt context before it reaches GitHub Copilot.",
+  "version": "0.1.0",
   "type": "module",
   "publisher": "pallattu",
   "license": "MIT",
+  "icon": "media/icon.png",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jacob-git/nano-agent-vscode.git"
@@ -19,18 +20,26 @@
   },
   "categories": [
     "AI",
-    "Linters",
-    "Other"
+    "Linters"
   ],
   "keywords": [
     "github-copilot",
     "copilot",
     "prompt",
     "tokens",
+    "token-budget",
+    "token-savings",
+    "cost",
+    "context",
     "llm",
     "ai",
-    "context-window"
+    "context-window",
+    "prompt-engineering"
   ],
+  "galleryBanner": {
+    "color": "#101923",
+    "theme": "dark"
+  },
   "activationEvents": [
     "onCommand:nanoAgent.analyzeSelection",
     "onCommand:nanoAgent.compactSelection",
@@ -97,6 +106,7 @@
   "scripts": {
     "clean": "node -e \"require('fs').rmSync('dist', { recursive: true, force: true })\"",
     "build": "tsc -p ./",
+    "icon": "node scripts/generate-icon.mjs",
     "watch": "tsc -watch -p ./",
     "lint": "tsc --noEmit -p ./",
     "test": "npm run clean && npm run build && node --test dist/test/*.test.js",
