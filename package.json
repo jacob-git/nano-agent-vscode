@@ -2,7 +2,7 @@
   "name": "nano-agent-vscode",
   "displayName": "Nano Agent",
   "description": "VS Code Copilot tools for inspecting, compacting, and enforcing AI prompt context budgets.",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "type": "module",
   "publisher": "pallattu",
   "license": "MIT",
@@ -38,8 +38,7 @@
     "onCommand:nanoAgent.addCiCheck",
     "onCommand:nanoAgent.showDiagnostics",
     "onCommand:nanoAgent.showOutput",
-    "onChatParticipant:nano-agent",
-    "onLanguageModelTool:nanoAgentAnalyzeSelection"
+    "onChatParticipant:nano-agent"
   ],
   "main": "./dist/extension.js",
   "contributes": {
@@ -93,30 +92,15 @@
         "fullName": "Nano Agent",
         "description": "Inspect and compact AI prompt context budgets."
       }
-    ],
-    "languageModelTools": [
-      {
-        "name": "nanoAgentAnalyzeSelection",
-        "displayName": "Analyze Nano Agent Context Budget",
-        "modelDescription": "Analyze the active editor selection or document and return Nano Agent token budget, savings, kept context, and dropped context.",
-        "inputSchema": {
-          "type": "object",
-          "properties": {
-            "maxInputTokens": {
-              "type": "number",
-              "description": "Maximum input tokens to allow."
-            }
-          }
-        }
-      }
     ]
   },
   "scripts": {
+    "clean": "node -e \"require('fs').rmSync('dist', { recursive: true, force: true })\"",
     "build": "tsc -p ./",
     "watch": "tsc -watch -p ./",
     "lint": "tsc --noEmit -p ./",
-    "test": "npm run build && node --test dist/test/*.test.js",
-    "package": "vsce package"
+    "test": "npm run clean && npm run build && node --test dist/test/*.test.js",
+    "package": "npm run clean && npm run build && vsce package"
   },
   "dependencies": {
     "@pallattu/nano-agent": "^0.2.2"
